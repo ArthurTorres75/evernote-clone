@@ -13,7 +13,9 @@ import {
   getFirestore,
   reduxFirestore,
 } from "redux-firestore";
-import { getApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import fbconfig from "./config/fbconfig";
 const store = createStore(
   rootReducer,
@@ -23,7 +25,7 @@ const store = createStore(
   )
 );
 const rrfProps = {
-  getApp,
+  firebase,
   config: fbconfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
