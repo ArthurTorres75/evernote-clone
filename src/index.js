@@ -1,47 +1,51 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import {
-  createFirestoreInstance,
-  getFirestore,
   reduxFirestore,
+  getFirestore,
+  createFirestoreInstance,
 } from "redux-firestore";
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import fbconfig from "./config/fbconfig";
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+} from "react-redux-firebase";
+import fbConfig from './config/fbconfig'
+import firebase from "firebase/app";
+
 const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(fbconfig)
+    reduxFirestore(fbConfig) // redux bindings for firestore
   )
+
 );
+
 const rrfProps = {
   firebase,
-  config: fbconfig,
+  config: fbConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance,
+  createFirestoreInstance, // <- needed if using firestore
 };
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </ReactReduxFirebaseProvider>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

@@ -6,28 +6,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #D3D3D3;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.brand-logo {
-  margin-left: 10px; 
-}
-
 form {
   padding: 20px;
   margin: 60px 20px 0px;
+  
 }
-
 .note {
   padding: 10px;
   margin-bottom: 30px;
 }
+.noteslist{
+  padding:20px;
+  margin-top:60px;
+}
 
-.notesList {
-  padding: 20px;
-  margin-top: 60px;
+.brand-logo{
+  margin-left: 10px;
 }
