@@ -5,7 +5,7 @@ const NotesList = ({ notes }) => {
         <div className="noteslist">
             {notes && notes.map(note =>
 
-                <Note note={note} />
+                <Note note={note} key={note.id} />
 
             )}
 

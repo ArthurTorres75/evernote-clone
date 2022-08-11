@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteNote } from '../../store/actions/noteAction'
+import { deleteNote, toggleFav } from '../../store/actions/noteAction'
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 
@@ -12,11 +12,17 @@ const Note = ({ note }) => {
         dispatch(deleteNote(note))
     }
 
+    const toggleFavoriteHandler = () => {
+        alert('updating')
+        dispatch(toggleFav(note))
+    }
+
+    const heartMarkup = note.favorite ? 'favorite' : 'favorite_border';
 
     return (
         <div className="note  white ">
             <div className="right-align">
-                <i className="material-icons red-text" style={{ cursor: 'pointer' }}>favorite</i>
+                <i className="material-icons red-text" style={{ cursor: 'pointer' }} onClick={toggleFavoriteHandler}>{heartMarkup}</i>
                 <i className="material-icons" style={{ cursor: 'pointer' }} onClick={deleteNoteHandler}>delete</i>
 
             </div>
