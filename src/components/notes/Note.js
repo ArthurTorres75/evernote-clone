@@ -2,7 +2,7 @@ import React from 'react'
 import { deleteNote, toggleFav } from '../../store/actions/noteAction'
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
-
+import moment from 'moment';
 const Note = ({ note }) => {
 
 
@@ -30,7 +30,7 @@ const Note = ({ note }) => {
                 <h5 className="black-text"> {note?.title}</h5>
             </Link>
             <p className="truncate">{note?.content}</p>
-            <p className="grey-text">2 days ago</p>
+            <p className="grey-text">{moment(note.createdAt.toDate()).fromNow()}</p>
             <div className="right-align">
                 <Link to={``} >
                     <i className="material-icons black-text" style={{ cursor: 'pointer' }} > edit</i>
