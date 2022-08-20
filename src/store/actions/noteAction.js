@@ -66,7 +66,7 @@ export const updateNote = (note) => {
                 title: note.title,
                 content: note.content
             }).then(() => {
-                console.log('toggle favorite success');
+                console.log('updated success');
             }).catch(err => {
                 console.log(err);
             })
