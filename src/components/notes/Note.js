@@ -16,7 +16,9 @@ const Note = ({ note }) => {
         alert('updating')
         dispatch(toggleFav(note))
     }
-
+    const editNoteHandler = () => {
+        dispatch({ type: 'EDIT_NOTE', payload: note })
+    }
     const heartMarkup = note.favorite ? 'favorite' : 'favorite_border';
 
     return (
@@ -32,8 +34,8 @@ const Note = ({ note }) => {
             <p className="truncate">{note?.content}</p>
             <p className="grey-text">{moment(note.createdAt.toDate()).fromNow()}</p>
             <div className="right-align">
-                <Link to={``} >
-                    <i className="material-icons black-text" style={{ cursor: 'pointer' }} > edit</i>
+                <Link to={`/editform/${note.id}`} >
+                    <i className="material-icons black-text" style={{ cursor: 'pointer' }} onClick={editNoteHandler}> edit</i>
                 </Link>
             </div>
         </div>
